@@ -102,7 +102,7 @@ def main(global_config, **settings):
     Base.metadata.create_all(engine)
 
     config = Configurator(settings=settings)
-    config.add_route('collector', '/collector')
+    config.add_route('collector', '/')
     config.scan()
 
     return config.make_wsgi_app()
