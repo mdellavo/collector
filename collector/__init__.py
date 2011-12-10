@@ -73,7 +73,11 @@ class Stat(Base):
 
 @view_config(route_name='collector', renderer='json')
 def collector(request):
-    data = request.json_body
+
+    try: 
+        data = request.json_body
+    except ValueError:
+        return {'status': 'error', 'message': 'could not decode body'}
     
     application = data.get('application')
     device_id = data.get('device_id')
