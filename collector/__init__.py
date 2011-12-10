@@ -1,4 +1,3 @@
-from paste.httpserver import serve
 from pyramid.config import Configurator
 from pyramid.response import Response
 from pyramid.view import view_config
@@ -107,6 +106,3 @@ def main(global_config, **settings):
     config.scan()
 
     return config.make_wsgi_app()
-
-if __name__ == '__main__':
-    serve(main(), host='0.0.0.0')
