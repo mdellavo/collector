@@ -91,8 +91,8 @@ def collector(request):
     stat = Stat(device_id=device_id, application=application)
 
     for k in data:
-        if k not in ('device_id', 'application', 'type')
-        stat.data[k] = data[k]
+        if k not in ('device_id', 'application', 'type'):
+            stat.data[k] = data[k]
 
     Session.add(stat)
     Session.commit()
