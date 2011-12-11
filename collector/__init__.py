@@ -61,8 +61,10 @@ class Stat(Base):
 
     id = Column(Integer, primary_key=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
-    application = Column(String, nullable=False)
+
     device_id = Column(String, nullable=False)
+    application = Column(String, nullable=False)    
+    type = Column(String, nullable=False)
 
     data_map = relationship(
         StatData,
@@ -78,19 +80,18 @@ def collector(request):
         data = request.json_body
     except ValueError:
         return {'status': 'error', 'message': 'could not decode body'}
-    
+
+    device_id = data.get('device_id')    
     application = data.get('application')
-    device_id = data.get('device_id')
+    type = data.get('type')
 
-    if not device_id or not  application:
+    if not device_id or not  application or not type:
         return {'status': 'error', 'message': 'bad object'}
-
-    del data['device_id']
-    del data['application']
 
     stat = Stat(device_id=device_id, application=application)
 
     for k in data:
+        if k not in ('device_id', 'application', 'type')
         stat.data[k] = data[k]
 
     Session.add(stat)
