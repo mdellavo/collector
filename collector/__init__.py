@@ -88,7 +88,7 @@ def collector(request):
     if not device_id or not  application or not type:
         return {'status': 'error', 'message': 'bad object'}
 
-    stat = Stat(device_id=device_id, application=application)
+    stat = Stat(device_id=device_id, application=application, type=type)
 
     for k in data:
         if k not in ('device_id', 'application', 'type'):
